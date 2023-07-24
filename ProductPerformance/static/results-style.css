@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    overflow-y: hidden;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    padding: 13px;
+    min-height: 6vh;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+.nav-links{
+    list-style: none;
+    justify-content: space-around;
+}
+.nav-link{
+    text-decoration: none;
+    color: rgb(221, 218, 218);
+    font-size: 20px;
+}
+#Home{
+    color: White;
+    font-size: 40px;
+}
+.logo-container, .nav-links, .cart{
+    display: flex;
+}
+nav{
+    flex: 2;
+    animation: navlink 4s ease;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-image: url("lol2.jpg");
+    background-size: contain;
+}
+    h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    }
+      /* Basic table styling */
+.table-container {
+  max-height: 655px; /* Adjust the maximum height as needed */
+  overflow: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%; /* Adjust the width as needed */
+  border-radius: 20px;
+  opacity: 7;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #fafafa;
+  z-index: 1;
+}
+th, td {
+  text-align: left;
+
+}
+/* Add scrollbar styles */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* Adjust scrollbar width as needed */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Adjust track background color as needed */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Adjust thumb color as needed */
+  border-radius: 5px; /* Adjust thumb border radius as needed */
+}
+th {
+  background: rgba(0, 0, 0);
+  color: #fafafa;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+tr {
+  width: auto;
+  background-color: #fafafa;
+  font-family: 'Montserrat', sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+
+/* Page header styling */
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.url-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td {
+  background: rgba(1, 1, 1, 0.1);
+}
+
+
+      /* No results message styling */
+      p {
+        text-align: center;
+        font-style: italic;
+        margin-top: 50px;
+      }

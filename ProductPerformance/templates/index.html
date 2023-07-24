@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index-style.css') }}">
+    <title>Restaurant Search</title>
+  </head>
+  <body>
+   <header>
+                <nav>
+                    <ul class="nav-links">
+                        <li>
+                             <div href="index.html" class="nav-link" id="Home" title="Home" style="display: flex; justify-content: center; align-items: center;">Value your Product with the competition here!</div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+    <form method="post" class="Signup" action="/search">
+      <div class="all">
+      <input class="all" type="text" id="location" placeholder="location" name="location" required>
+      </div>
+        <div class="all">
+      <input class="all" type="text" id="tt" placeholder="type of establishment" name="establishment" required>
+      </div>
+        <div class="all">
+            <input type="text" id="categories" name="categories" placeholder="type of product" required>
+        </div>
+          <div class="all">
+      <input type="text" id="price" name="price" placeholder="Average price" required>
+    </div>
+        <br>
+        <br>
+      <input class="submit" type="submit" value="Search">
+    </form>
+
+  </body>
+</html>

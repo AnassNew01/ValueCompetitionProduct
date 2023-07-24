@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='results-style.css') }}">
+    <title>Restaurant Search Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.url-cell').each(function() {
+          var url = $(this).text();
+          if (url.length > 0) {
+            $(this).html('<a href="' + url + '" target="_blank">View Menu Here</a>');
+          }
+        });
+
+        $('#results-table tbody tr').each(function() {
+          var averagePriceText = $(this).find('td:nth-child(3)').text();
+
+          // Delete the row if average price is empty
+          if (averagePriceText.trim() === '') {
+            $(this).remove();
+            return; // Skip to the next iteration
+          }
+
+          // Convert dollar symbol to price range
+          var averagePriceRange = convertAveragePriceSymbol(averagePriceText);
+          $(this).find('td:nth-child(3)').text(averagePriceRange);
+
+          var userPrice = parseFloat($('#price').val()); // Get user's average price input
+          var userPriceValue = getUserPriceValue(userPrice);
+
+          var averagePriceValue = getAveragePriceValue(averagePriceRange);
+
+          var valueCell = $(this).find('td:nth-child(4)');
+
+          if (averagePriceValue > userPriceValue) {
+            valueCell.text('Cheaper product');
+          } else if (averagePriceValue < userPriceValue) {
+            valueCell.text('Costly product');
+          } else {
+            valueCell.text('Same price range');
+          }
+        });
+      });
+
+      function convertAveragePriceSymbol(priceSymbol) {
+        switch (priceSymbol) {
+          case '$':
+            return 'Under 10$';
+          case '$$':
+            return '10$ - 20$';
+          case '$$$':
+            return '20$ - 30$';
+          case '$$$$':
+            return 'Over 30$';
+          default:
+            return 'Unknown';
+        }
+      }
+
+      function getUserPriceValue(price) {
+        if (price < 10) {
+          return 1;
+        } else if (price >= 10 && price < 20) {
+          return 2;
+        } else if (price >= 20 && price < 30) {
+          return 3;
+        } else {
+          return 4;
+        }
+      }
+
+      function getAveragePriceValue(priceRange) {
+        switch (priceRange) {
+          case 'Under 10$':
+            return 1;
+          case '10$ - 20$':
+            return 2;
+          case '20$ - 30$':
+            return 3;
+          case 'Over 30$':
+            return 4;
+          default:
+            return 0;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <ul class="nav-links">
+            <li>
+              <a href="index.html" class="nav-link" id="Home" title="Home" style="display: flex; justify-content: center; align-items: center;">Search Results</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="table-container">
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th class="title">Name</th>
+              <th class="title">Restaurant Menu</th>
+              <th class="title">Average Price</th>
+              <th class="title">Value of Your Product</th>
+              <th class="title">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for business in data['businesses'] %}
+            <tr>
+              <td>{{ business['name'] }}</td>
+              <td class="url-cell"><a href="{{ business['url'] }}" target="_blank">{{ business['url'] }}</a></td>
+              <td>{{ business['price'] }}</td>
+              <td></td>
+              <td>{{ business['rating'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <div style="background-color: rgba(0, 0, 0, 0.7); padding: 5px 10px 2px 10px; border-radius: 10px; border: 2px solid white; text-align: center;">
+          <p style="color: white; font-size: 20px; margin: 0;">Index: $ -&gt; Under 10$  //  $$ -&gt; 10$-20$  //  $$$ -&gt; 20$-30$  //   $$$$ -&gt; Over 30$</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
